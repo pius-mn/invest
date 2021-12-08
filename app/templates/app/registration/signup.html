@@ -1,0 +1,44 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+{% block content %}
+
+
+<body class="login">
+	<div class="wrapper wrapper-login">
+		<form  method="POST">
+		<div class="container container-login animated fadeIn">
+			<h3 class="text-center">Sign Up</h3>
+			
+			<div class="login-form">
+				<form method="POST">
+				{% csrf_token %}
+
+                {% for field in form %}
+                <p>
+                  {{ field.label_tag }}<br>
+                  {{ field }}
+                  {% if field.help_text %}
+                    <small style="color: grey">{{ field.help_text }}</small>
+                  {% endif %}
+                  {% for error in field.errors %}
+                <small><p class="text-danger">{{ error }}</p></small>
+                  {% endfor %}
+                </p>
+              {% endfor %}
+				</form>
+					
+				<div class="form-action mb-3">
+					<input type="submit" value="SIGNIN" class="btn btn-primary btn-rounded btn-login" >
+				</div>
+				<div class="login-account">
+					<span class="msg">Have an account  ?</span>
+					<a href="{% url 'login' %}" id="show-signup" class="link">LOGIN</a>
+				</div>
+			</div>
+		</div>
+
+		
+		</div>
+	
+	</div>
+	{% endblock content %}

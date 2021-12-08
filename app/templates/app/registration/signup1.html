@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Sign up Form</h2>
+<form method="post">
+  {% csrf_token %}
+  {% for field in form %}
+    <p>
+      {{ field.label_tag }}<br>
+      {{ field }}
+      {% if field.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+    </p>
+  {% endfor %}
+  <button type="submit">Sign up</button>
+</form>
+{% endblock %}
+
+<!---->
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+<h2>Log In</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Log In</button>
+</form>
+{% endblock %}
+<div class="form-body without-side">
+  <div class="website-logo">
+      <a href="index.html">
+          <div class="logo">
+              <img class="logo-size" src="images/logo-light.svg" alt="">
+          </div>
+      </a>
+  </div>
+  <div class="row">
+      <div class="img-holder">
+          <div class="bg"></div>
+          <div class="info-holder">
+              <img src="images/graphic3.svg" alt="">
+          </div>
+      </div>
+      <div class="form-holder">
+          <div class="form-content">
+              <div class="form-items">
+                  <h3>Password Reset</h3>
+                  <p>To reset your password, enter the email address you use to sign in to iofrm</p>
+                  <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                      <div class="form-button full-width">
+                          <button id="submit" type="submit" class="ibtn btn-forget">Send Reset Link</button>
+                      </div>
+                  </form>
+              </div>
+              <div class="form-sent">
+                  <div class="tick-holder">
+                      <div class="tick-icon"></div>
+                  </div>
+                  <h3>Password link sent</h3>
+                  <p>Please check your inbox</p>
+                  <div class="info-holder">
+                      <span>Unsure if that email address was correct?</span> <a href="#">We can help</a>.
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
